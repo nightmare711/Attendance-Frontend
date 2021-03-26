@@ -1,6 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
+import LogoImg from 'assets/avt.png'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useToggleSidebar } from 'services/useDOM'
 import { faChevronCircleRight, faBell, faComments } from '@fortawesome/free-solid-svg-icons'
 import { SearchEngine } from 'components'
 import { MAIN_COLOR, TEXT_COLOR, bg_1 } from 'constants/theme'
@@ -16,15 +18,31 @@ const Container = styled.div`
 	color: ${TEXT_COLOR};
 	justify-content: space-between;
 `
-const Logo = styled.h1`
+const TextLogo = styled.h1`
 	font-family: 'Cassandra', arial;
-	font-size: 30px;
+	font-size: 25px;
 	font-weight: 600;
-	width: 300px;
 	text-align: center;
+	margin-left: 20px;
+`
+const ContainerLogo = styled.div`
+	width: 300px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+`
+const Logo = styled.img.attrs((props) => ({
+	src: LogoImg,
+}))`
+	width: 40px;
 `
 const ContainerIcon = styled.div`
 	font-size: 25px;
+	cursor: pointer;
+`
+const ContainerIconSidebar = styled(ContainerIcon)`
+	transform: rotate(180deg);
+	transition: all 0.3s;
 `
 const ContainerIconPoint = styled(ContainerIcon)`
 	position: relative;
@@ -80,13 +98,17 @@ const AccountText = styled.span`
 `
 
 export const Navbar = () => {
+	const toggleSidebar = useToggleSidebar()
 	return (
 		<Container>
 			<LeftContainer>
-				<Logo>Block Magic</Logo>
-				<ContainerIcon>
+				<ContainerLogo>
+					<Logo />
+				</ContainerLogo>
+				<ContainerIconSidebar id='icon-sidebar' onClick={toggleSidebar}>
 					<FontAwesomeIcon className='icon' icon={faChevronCircleRight} />
-				</ContainerIcon>
+				</ContainerIconSidebar>
+				<TextLogo>Block Magic</TextLogo>
 			</LeftContainer>
 			<RightContainer>
 				<SearchEngine />
