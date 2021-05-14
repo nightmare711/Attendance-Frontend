@@ -1,3 +1,5 @@
 export * from './Login/LoginPage'
 export * from './Register/RegisterPage'
 export * from './DashboardEmployee/DashboardEmployee'
+export * from './Holiday/Holiday'
+export * from './Profile/Profile'

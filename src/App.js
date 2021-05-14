@@ -1,7 +1,7 @@
 import React from 'react'
 import { Navbar, Sidebar } from 'components'
 import { Switch, Route } from 'react-router-dom'
-import { LoginPage, RegisterPage, DashboardEm } from 'pages'
+import { LoginPage, RegisterPage, DashboardEm, Holiday, Profile } from 'pages'
 import { DataContext } from 'contexts/DataContext'
 
 function App() {
