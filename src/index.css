@@ -7,7 +7,7 @@ body {
   
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font-family: 'Circular Std Bold';
+  font-family:  'Comic Sans MS';
 }
 ::root {
   --main-color: #eeee;
@@ -16,4 +16,12 @@ body {
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+.react-datepicker__input-container input{
+  background-color: transparent !important;
+  outline: none;
+}
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }

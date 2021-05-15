@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { useLogin } from 'services/useAuth'
 import { bg_2, TEXT_COLOR } from 'constants/theme'
 import {
 	Form,
@@ -26,6 +27,11 @@ const Container = styled.div`
 `
 
 export const LoginPage = () => {
+	const login = useLogin()
+	const [account, setAccount] = React.useState({
+		email: '',
+		password: '',
+	})
 	return (
 		<Container>
 			<Logo />
@@ -34,13 +40,29 @@ export const LoginPage = () => {
 				<TitleExtend>Access to our Dashboard</TitleExtend>
 				<ContainerInput>
 					<Label>Email Address</Label>
-					<FormInput type='email' />
+					<FormInput
+						onChange={(e) =>
+							setAccount({
+								...account,
+								email: e.target.value,
+							})
+						}
+						type='email'
+					/>
 				</ContainerInput>
 				<ContainerInput>
 					<Label>Password</Label>
-					<FormInput type='password' />
+					<FormInput
+						onChange={(e) =>
+							setAccount({
+								...account,
+								password: e.target.value,
+							})
+						}
+						type='password'
+					/>
 				</ContainerInput>
-				<BtnPrimary>Login</BtnPrimary>
+				<BtnPrimary onClick={() => login(account.email, account.password)}>Login</BtnPrimary>
 				<Question>
 					Don't have an account yet? <LinkQuestion href='/register'>Register</LinkQuestion>
 				</Question>

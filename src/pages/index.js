@@ -1,2 +1,6 @@
 export * from './Login/LoginPage'
 export * from './Register/RegisterPage'
+export * from './InformationFill/InformationFill'
+export * from './StudentsPage/StudentsPage'
+export * from './Attendance/Attendance'
+export * from './Subject/Subject'

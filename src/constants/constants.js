@@ -1,5 +1,5 @@
-import { faTachometerAlt } from '@fortawesome/free-solid-svg-icons'
-
+import { faTachometerAlt, faUser, faCalendar, faBell } from '@fortawesome/free-solid-svg-icons'
+import { faFacebookMessenger } from '@fortawesome/free-brands-svg-icons'
 export const listSidebar = [
 	{
 		title: 'Dash Board',
@@ -8,17 +8,22 @@ export const listSidebar = [
 	},
 	{
 		title: 'Students',
-		icon: faTachometerAlt,
+		icon: faUser,
+		child: [],
+	},
+	{
+		title: 'Calendar',
+		icon: faCalendar,
 		child: [],
 	},
 	{
 		title: 'Chat',
-		icon: faTachometerAlt,
+		icon: faFacebookMessenger,
 		child: [],
 	},
 	{
 		title: 'Notification',
-		icon: faTachometerAlt,
+		icon: faBell,
 		child: [],
 	},
 	{
@@ -32,3 +37,4 @@ export const listSidebar = [
 		child: [],
 	},
 ]
+export const KEY_SECRET = 'nightmare_secret_key'

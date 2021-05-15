@@ -1,12 +1,13 @@
 import React from 'react'
 import styled from 'styled-components'
 import LogoImg from 'assets/avt.png'
+import { useGetUserInfo } from 'queries/account.queries'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useToggleSidebar } from 'services/useDOM'
 import { faChevronCircleRight, faBell, faComments } from '@fortawesome/free-solid-svg-icons'
 import { SearchEngine } from 'components'
+import { useLogout } from 'services/useAuth'
 import { MAIN_COLOR, TEXT_COLOR, bg_1 } from 'constants/theme'
-import Avatar from 'assets/avt.png'
 
 const Container = styled.div`
 	display: flex;
@@ -19,7 +20,7 @@ const Container = styled.div`
 	justify-content: space-between;
 `
 const TextLogo = styled.h1`
-	font-family: 'Cassandra', arial;
+	font-family: 'Dexotick By Dhan Studio', arial;
 	font-size: 25px;
 	font-weight: 600;
 	text-align: center;
@@ -98,7 +99,9 @@ const AccountText = styled.span`
 `
 
 export const Navbar = () => {
+	const { data: account, isSuccess } = useGetUserInfo()
 	const toggleSidebar = useToggleSidebar()
+	const logout = useLogout()
 	return (
 		<Container>
 			<LeftContainer>
@@ -120,9 +123,9 @@ export const Navbar = () => {
 					<FontAwesomeIcon icon={faComments} />
 					<Badge>0</Badge>
 				</ContainerIconPoint>
-				<AccountContainer>
-					<AccountText>Hoang Tran</AccountText>
-					<AccountImg src={Avatar} alt='avt' />
+				<AccountContainer onClick={logout}>
+					<AccountText>{isSuccess ? account?.user?.name : null}</AccountText>
+					<AccountImg src={account?.user?.imgUrl || ''} alt='avt' />
 				</AccountContainer>
 			</RightContainer>
 		</Container>
