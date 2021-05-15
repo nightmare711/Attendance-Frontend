@@ -9,6 +9,9 @@ import {
 	StudentsPage,
 	AttendancePage,
 	Subject,
+	DashboardEmployee,
+	Holiday,
+	Profile,
 } from 'pages'
 import { DataContext } from 'contexts/DataContext'
 import { useGetUserInfo } from 'queries/account.queries'
@@ -55,6 +58,9 @@ function App() {
 				<ContainerBody>
 					<Sidebar />
 					<Switch>
+						<Route exact path='/dashboard' component={DashboardEmployee} />
+						<Route exact path='/profile' component={Profile} />
+						<Route exact path='/holiday' component={Holiday} />
 						<Route exact path='/attendance' component={AttendancePage} />
 						<Route exact path='/students' component={StudentsPage} />
 						<Route exact path='/subject' component={Subject} />

@@ -28,3 +28,7 @@ export const BtnTertiary = styled.div`
 		transform: translateY(3px);
 	}
 `
+export * from './Information/Information'
+export * from './Project/Project'
+export * from './Leave/Leave'
+export * from './TimeOff/TimeOff'
