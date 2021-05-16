@@ -41,3 +41,21 @@ export const useGetSubjectById = () => {
 			.catch((err) => console.log(err))
 	})
 }
+export const useUpdateStudentsId = () => {
+	return (studentsId, subjectId, teacherId) => {
+		return fetch(API_TEST + '/subject/update', {
+			method: 'POST',
+			body: JSON.stringify({
+				teacherId,
+				subjectId,
+				studentsId,
+			}),
+			headers: {
+				'Content-type': 'application/json',
+			},
+		})
+			.then((res) => res.json())
+			.then(console.log)
+			.catch(console.log)
+	}
+}

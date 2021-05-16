@@ -4,7 +4,7 @@ import LogoImg from 'assets/avt.png'
 import { useGetUserInfo } from 'queries/account.queries'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { useToggleSidebar } from 'services/useDOM'
-import { faChevronCircleRight, faBell, faComments } from '@fortawesome/free-solid-svg-icons'
+import { faChevronCircleRight } from '@fortawesome/free-solid-svg-icons'
 import { SearchEngine } from 'components'
 import { useLogout } from 'services/useAuth'
 import { MAIN_COLOR, TEXT_COLOR, bg_1 } from 'constants/theme'
@@ -45,30 +45,13 @@ const ContainerIconSidebar = styled(ContainerIcon)`
 	transform: rotate(180deg);
 	transition: all 0.3s;
 `
-const ContainerIconPoint = styled(ContainerIcon)`
-	position: relative;
-`
-const Badge = styled.div`
-	position: absolute;
-	top: 0;
-	right: 0;
-	background-color: #fc6075;
-	width: 15px;
-	height: 15px;
-	font-size: 10px;
-	color: white;
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	border-radius: 50%;
-`
 const RightContainer = styled.div`
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-end;
 	padding: 0px 40px;
-	width: 45%;
+	width: 40%;
 `
 const LeftContainer = styled.div`
 	display: flex;
@@ -115,14 +98,6 @@ export const Navbar = () => {
 			</LeftContainer>
 			<RightContainer>
 				<SearchEngine />
-				<ContainerIconPoint>
-					<FontAwesomeIcon icon={faBell} />
-					<Badge>0</Badge>
-				</ContainerIconPoint>
-				<ContainerIconPoint>
-					<FontAwesomeIcon icon={faComments} />
-					<Badge>0</Badge>
-				</ContainerIconPoint>
 				<AccountContainer onClick={logout}>
 					<AccountText>{isSuccess ? account?.user?.name : null}</AccountText>
 					<AccountImg src={account?.user?.imgUrl || ''} alt='avt' />

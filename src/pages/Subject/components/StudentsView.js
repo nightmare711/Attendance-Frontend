@@ -1,10 +1,13 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React from 'react'
 import { BtnTertiary, PaddingContent } from 'components'
 import { Title } from 'components/Title/Title'
 import { useGetStudents } from 'queries/students.query'
 import styled from 'styled-components'
+import { useGetSubjectById } from 'services/admin/useSubject'
 import { DataContext } from 'contexts/DataContext'
-import { Link } from 'react-router-dom'
+import { onFilterStudentsById } from 'services/useFilter'
+import { AddStudentModal } from './AddStudents'
 
 const StudentsContainer = styled.div`
 	background-color: #23272b;
@@ -54,7 +57,6 @@ const TextContainer = styled.div`
 	flex-direction: column;
 	text-align: center;
 	margin-top: 20px;
-	cursor: pointer;
 `
 const BtnSearch = styled.div`
 	background-color: #55cd62;
@@ -96,31 +98,46 @@ const BtnView = styled.div`
 		color: black;
 	}
 `
-export const StudentsPage = () => {
+export const StudentsView = () => {
 	const { data: students } = useGetStudents()
 	const data = React.useContext(DataContext)
+	const { data: subjects } = useGetSubjectById()
+	const [isOpenModal, setIsOpenModal] = React.useState(false)
+	const [studentsFilter, setStudentsFilter] = React.useState([])
+	React.useEffect(() => {
+		if (students && subjects) {
+			const studentsTemp = onFilterStudentsById(students, subjects, data.idProject)
+			setStudentsFilter(studentsTemp)
+		}
+	}, [students, subjects])
 	return (
 		<StudentsContainer>
+			{isOpenModal ? (
+				<AddStudentModal
+					setIsOpenModal={setIsOpenModal}
+					students={students}
+					subjects={subjects}
+					idProject={data.idProject}
+				/>
+			) : null}
 			<PaddingContent>
 				<ContainerHeader>
 					<Title title='Employee' route='Employee' />
-					<BtnTertiary>Add Student</BtnTertiary>
+					<BtnTertiary onClick={() => setIsOpenModal(true)}>Add Student</BtnTertiary>
 				</ContainerHeader>
 				<ContainerList>
 					<SearchInput placeholder='Employee ID' />
 					<SearchInput placeholder='Name' />
 					<SearchInput disabled />
 					<BtnSearch> Search </BtnSearch>
-					{students
-						? students.map((student) => (
-								<Students>
+					{studentsFilter
+						? studentsFilter.map((student, index) => (
+								<Students key={index}>
 									<Avatar src={student.imgUrl} />
-									<Link to='/students/profile'>
-										<TextContainer onClick={() => data.setStudentSelected(student._id)}>
-											<Name>{student.name}</Name>
-											<ID>{student.email.substr(0, 8)}</ID>
-										</TextContainer>
-									</Link>
+									<TextContainer>
+										<Name>{student.name}</Name>
+										<ID>{student.email.substr(0, 8)}</ID>
+									</TextContainer>
 									<BtnView
 										onClick={() =>
 											window.open('https://www.messenger.com/t/' + student.idFB || '', '_blank')

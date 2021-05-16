@@ -1,9 +1,12 @@
 import React from 'react'
 import { PaddingContent, BtnTertiary } from 'components'
+import { StudentsPage } from './components/Students'
 import { Title } from 'components/Title/Title'
 import { AddSubject } from './components/AddSubject'
 import { useGetSubjectById } from 'services/admin/useSubject'
+import { DataContext } from 'contexts/DataContext'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const SubjectContainer = styled.div`
 	background-color: #23272b;
@@ -47,9 +50,41 @@ const TDescription = styled.td`
 export const Subject = () => {
 	const [isOpenAddSubject, setIsOpenAddName] = React.useState(false)
 	const { data: subjects } = useGetSubjectById()
+	const data = React.useContext(DataContext)
+	const [isOpenAddStudents, setIsOpenAddStudents] = React.useState(false)
+	const [infoSubject, setInfoSubject] = React.useState({
+		subjectName: '',
+		startDate: null,
+		endDate: null,
+		studentsId: [],
+		timeStart: 0,
+		timeEnd: 0,
+		timeAttendance: '',
+		timeEndAttendance: '',
+	})
+	const onAddStudents = (studentId) => {
+		const students = [...infoSubject.studentsId]
+		if (!students.includes(studentId)) {
+			students.push(studentId)
+			setInfoSubject({
+				...infoSubject,
+				studentsId: students,
+			})
+		}
+	}
 	return (
 		<SubjectContainer>
-			{isOpenAddSubject ? <AddSubject onClose={() => setIsOpenAddName(false)} /> : null}
+			{isOpenAddSubject ? (
+				<AddSubject
+					infoSubject={infoSubject}
+					setInfoSubject={setInfoSubject}
+					setIsOpenAddStudents={setIsOpenAddStudents}
+					onClose={() => setIsOpenAddName(false)}
+				/>
+			) : null}
+			{isOpenAddStudents ? (
+				<StudentsPage setIsOpenAddStudents={setIsOpenAddStudents} onAddStudents={onAddStudents} />
+			) : null}
 			<PaddingContent>
 				<ContainerHeader>
 					<Title title='Subject' route='Subject' />
@@ -78,7 +113,11 @@ export const Subject = () => {
 										</TDescription>
 										<TDescription>{subject.time[0] + '-' + subject.time[1]}</TDescription>
 										<TDescription>
-											<BtnTertiary>View</BtnTertiary>
+											<Link to='/subject/view'>
+												<BtnTertiary onClick={() => data.setIdProject(subject._id)}>
+													View
+												</BtnTertiary>
+											</Link>
 										</TDescription>
 										<TDescription>
 											<BtnTertiary>View</BtnTertiary>

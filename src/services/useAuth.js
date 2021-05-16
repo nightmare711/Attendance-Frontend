@@ -31,7 +31,7 @@ export const useRegister = ({ email, password, confirm, studentId, idFB }) => {
 						body: bodyJson,
 					})
 						.then((res) => {
-							console.log(res)
+							window.location.href = '/login'
 						})
 						.catch((err) => alert(err))
 				} else {

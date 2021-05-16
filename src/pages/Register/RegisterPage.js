@@ -21,7 +21,8 @@ const Container = styled.div`
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	height: 100vh;
+	height: fit-content;
+	padding: 50px 0px;
 	background-color: ${bg_2};
 	flex-direction: column;
 	color: ${TEXT_COLOR};

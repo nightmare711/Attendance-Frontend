@@ -49,19 +49,9 @@ const ContainerContent = styled.div`
 	justify-content: center;
 `
 
-export const AddSubject = ({ onClose }) => {
+export const AddSubject = ({ onClose, infoSubject, setInfoSubject, setIsOpenAddStudents }) => {
 	const data = React.useContext(DataContext)
 	const { mutate: postSubject } = usePostSubject()
-	const [infoSubject, setInfoSubject] = React.useState({
-		subjectName: '',
-		startDate: null,
-		endDate: null,
-		studentsId: [],
-		timeStart: 0,
-		timeEnd: 0,
-		timeAttendance: '',
-		timeEndAttendance: '',
-	})
 	const onPostSubject = () => {
 		try {
 			let count = 0
@@ -140,7 +130,7 @@ export const AddSubject = ({ onClose }) => {
 								type='date'
 							/>
 						</ContainerInput>
-						<ContainerInput>
+						<ContainerInput onClick={() => setIsOpenAddStudents(true)}>
 							<Label>Students</Label>
 							<FormInput
 								className='students'

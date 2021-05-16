@@ -12,3 +12,19 @@ export const useGetStudents = () => {
 			.catch((err) => console.log(err))
 	})
 }
+export const useGetStudent = () => {
+	const data = React.useContext(DataContext)
+	const [studentProfile, setStudentProfile] = React.useState(null)
+	React.useEffect(() => {
+		if (data.studentSelected) {
+			fetch(API_TEST + `/user/${data.studentSelected}`)
+				.then((res) => res.json())
+				.then((result) => setStudentProfile(result.user))
+				.catch((err) => {})
+		}
+	})
+	if (studentProfile) {
+		return [studentProfile]
+	}
+	return null
+}

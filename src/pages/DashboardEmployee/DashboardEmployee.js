@@ -1,5 +1,4 @@
 import React from 'react'
-import './DashboardEmployee.css'
 import { Information, Project, Leave, TimeOff } from 'components'
 import styled from 'styled-components'
 
@@ -9,6 +8,8 @@ const BodyEmployee = styled.div`
 	background-color: #23272b;
 	padding: 0 20px;
 	box-sizing: border-box;
+	width: 100%;
+	overflow: scroll;
 `
 const LeftDashboard = styled.div`
 	width: 65%;

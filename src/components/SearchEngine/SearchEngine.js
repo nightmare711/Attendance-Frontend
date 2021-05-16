@@ -6,6 +6,7 @@ import { bg_1 } from 'constants/theme'
 
 const SearchContainer = styled.div`
 	position: relative;
+	margin-right: 20px;
 `
 const SearchInput = styled.input`
 	background-color: ${bg_1};

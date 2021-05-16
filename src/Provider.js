@@ -30,6 +30,8 @@ export const Provider = ({ children }) => {
 	})
 	const [count, setCount] = React.useState(0)
 	const [isFillInformation, setIsFillInformation] = React.useState()
+	const [idProject, setIdProject] = React.useState('')
+	const [studentSelected, setStudentSelected] = React.useState('')
 	// React.useEffect(() => {
 	// 	const dataExpiration = JSON.parse(localStorage.getItem('l_i'))?.expiration || 0
 	// 	if (dataExpiration <= new Date()) {
@@ -52,6 +54,10 @@ export const Provider = ({ children }) => {
 					setCount,
 					isFillInformation,
 					setIsFillInformation,
+					idProject,
+					setIdProject,
+					studentSelected,
+					setStudentSelected,
 				}}
 			>
 				<QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

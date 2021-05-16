@@ -13,6 +13,7 @@ import {
 	Holiday,
 	Profile,
 } from 'pages'
+import { StudentsView } from 'pages/Subject/components/StudentsView'
 import { DataContext } from 'contexts/DataContext'
 import { useGetUserInfo } from 'queries/account.queries'
 
@@ -58,12 +59,15 @@ function App() {
 				<ContainerBody>
 					<Sidebar />
 					<Switch>
-						<Route exact path='/dashboard' component={DashboardEmployee} />
-						<Route exact path='/profile' component={Profile} />
+						<Route exact path='/students/profile' component={Profile} />
 						<Route exact path='/holiday' component={Holiday} />
 						<Route exact path='/attendance' component={AttendancePage} />
 						<Route exact path='/students' component={StudentsPage} />
 						<Route exact path='/subject' component={Subject} />
+						<Route exact path='/subject/view'>
+							<StudentsView />
+						</Route>
+						<Route path='/dashboard' component={DashboardEmployee} />
 					</Switch>
 				</ContainerBody>
 			</>
