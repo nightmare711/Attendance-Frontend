@@ -4,6 +4,7 @@ import {
 	faCalendar,
 	faBell,
 	faBook,
+	faThList,
 } from '@fortawesome/free-solid-svg-icons'
 export const listSidebar = [
 	{
@@ -34,7 +35,7 @@ export const listSidebar = [
 		title: 'Notification',
 		icon: faBell,
 		child: [],
-		href: '/subject',
+		href: '/notification',
 	},
 	{
 		title: 'History',
@@ -45,6 +46,12 @@ export const listSidebar = [
 		title: 'Search students',
 		icon: faTachometerAlt,
 		child: [],
+	},
+	{
+		title: 'Attendance',
+		icon: faThList,
+		child: [],
+		href: '/attendance',
 	},
 ]
 export const KEY_SECRET = 'nightmare_secret_key'

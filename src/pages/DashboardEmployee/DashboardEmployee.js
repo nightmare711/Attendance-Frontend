@@ -10,6 +10,7 @@ const BodyEmployee = styled.div`
 	box-sizing: border-box;
 	width: 100%;
 	overflow: scroll;
+	overflow-x: hidden;
 `
 const LeftDashboard = styled.div`
 	width: 65%;

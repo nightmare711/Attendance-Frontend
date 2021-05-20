@@ -36,10 +36,13 @@ export const BtnPrimary = styled.button`
 	color: white;
 	padding: 10px 20px;
 	margin-top: 30px;
-	outline: none;
+	outline: none !important;
 	transition: all 0.3s;
+
 	&:active {
+		outline: none;
 		background: ${bg_btn};
+		transform: translateY(3px);
 	}
 `
 export const Title = styled.h1`

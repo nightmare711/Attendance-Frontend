@@ -12,6 +12,8 @@ import {
 	DashboardEmployee,
 	Holiday,
 	Profile,
+	DashboardAdmin,
+	NotificationAdmin,
 } from 'pages'
 import { StudentsView } from 'pages/Subject/components/StudentsView'
 import { DataContext } from 'contexts/DataContext'
@@ -59,6 +61,8 @@ function App() {
 				<ContainerBody>
 					<Sidebar />
 					<Switch>
+						<Route exact path='/notification' component={NotificationAdmin} />
+						<Route exact path='/dashboard-admin' component={DashboardAdmin} />
 						<Route exact path='/students/profile' component={Profile} />
 						<Route exact path='/holiday' component={Holiday} />
 						<Route exact path='/attendance' component={AttendancePage} />
