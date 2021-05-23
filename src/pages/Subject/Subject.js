@@ -100,13 +100,14 @@ export const Subject = () => {
 							<THead>Students</THead>
 							<THead>Attendance</THead>
 							<THead>Time Attendance</THead>
+							<THead>Add Notification</THead>
 						</TRow>
 					</HeadTable>
 					<BodyTable>
 						{subjects
 							? subjects.map((subject) => (
 									<TRow>
-										<TDescription>{subject._id}</TDescription>
+										<TDescription>{subject._id.substr(0, 4) + '...'}</TDescription>
 										<TDescription>{subject.subjectName}</TDescription>
 										<TDescription>
 											{subject.date[0].substr(0, 4) + '-' + subject.date[1].substr(0, 4)}
@@ -127,6 +128,13 @@ export const Subject = () => {
 											<BtnTertiary>
 												{subject.attendanceTime[0] + '-' + subject.attendanceTime[1] || 0}
 											</BtnTertiary>
+										</TDescription>
+										<TDescription>
+											<Link to='/notification/add-notification'>
+												<BtnTertiary onClick={() => data.setIdProject(subject._id)}>
+													Add
+												</BtnTertiary>
+											</Link>
 										</TDescription>
 									</TRow>
 							  ))

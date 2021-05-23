@@ -5,7 +5,7 @@ export const useToggleSidebar = () => {
 	const data = React.useContext(DataContext)
 	return () => {
 		if (data.isOpenSidebar) {
-			document.querySelector('#sidebar').style.width = '65px'
+			document.querySelector('#sidebar').style.width = '60px'
 			document.querySelector('#icon-sidebar').style.transform = 'rotate(0deg)'
 			data.setIsOpenSidebar(false)
 		} else {
