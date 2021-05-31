@@ -9,7 +9,6 @@ const ContainerInfor = styled.div`
 const HeadInfor = styled.div`
 	text-transform: uppercase;
 	color: #bbc4cc;
-	margin: 18px 0;
 	font-size: 20px;
 `
 const ItemInfor = styled.li`

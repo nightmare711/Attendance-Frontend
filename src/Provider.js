@@ -14,11 +14,13 @@ const accessId = CryptoJS.AES.decrypt(
 	JSON.parse(localStorage.getItem('l_i'))?.userId || '',
 	KEY_SECRET
 ).toString(CryptoJS.enc.Utf8)
+const studentId = JSON.parse(localStorage.getItem('l_i'))?.studentId
 export const Provider = ({ children }) => {
 	const [isOpenSidebar, setIsOpenSidebar] = React.useState(true)
 	const [isLogin, setIsLogin] = React.useState({
 		accessToken: accessToken || '',
 		user_id: accessId || '',
+		studentId: studentId || '',
 	})
 	const [isOpenWebcam, setIsOpenWebcam] = React.useState(false)
 	const [info, setInfo] = React.useState({

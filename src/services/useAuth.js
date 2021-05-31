@@ -63,6 +63,7 @@ export const useLogin = () => {
 					data.setIsLogin({
 						accessToken: result.accessToken,
 						user_id: result.user,
+						studentId: result.studentId,
 					})
 					localStorage.setItem(
 						'l_i',
@@ -70,6 +71,7 @@ export const useLogin = () => {
 							userId: cipherId,
 							cipherText: cipherText,
 							expiration: new Date().getTime() + 1800000,
+							studentId: result.studentId,
 						})
 					)
 				} else {

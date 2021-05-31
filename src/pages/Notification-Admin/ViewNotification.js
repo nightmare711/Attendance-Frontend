@@ -1,8 +1,8 @@
 import React from 'react'
 import styled from 'styled-components'
-import { PaddingContent, BtnPrimary } from 'components'
+import { PaddingContent } from 'components'
 import { useGetNotification } from 'queries/notification.queries'
-import { TEXT_COLOR, bg_1 } from 'constants/theme'
+import { TEXT_COLOR } from 'constants/theme'
 import { Title } from 'components/Title/Title'
 
 const Container = styled.div`

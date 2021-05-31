@@ -7,7 +7,7 @@ const ContainerProject = styled.div`
 const HeadTitle = styled.div`
 	text-transform: uppercase;
 	color: #bbc4cc;
-	margin: 18px 0;
+	margin-bottom: 18px;
 	font-size: 15px;
 `
 const BodyProject = styled.div`

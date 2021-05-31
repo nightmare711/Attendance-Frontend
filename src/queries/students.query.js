@@ -2,6 +2,7 @@ import React from 'react'
 import { useQuery } from 'react-query'
 import { API_TEST } from 'constants/api'
 import { DataContext } from 'contexts/DataContext'
+import { useGetUserInfo } from './account.queries'
 
 export const useGetStudents = () => {
 	const data = React.useContext(DataContext)
@@ -27,4 +28,30 @@ export const useGetStudent = () => {
 		return [studentProfile]
 	}
 	return null
+}
+export const useGetSubjects = () => {
+	const { data: userInfo } = useGetUserInfo()
+	console.log(userInfo)
+	return useQuery(
+		['useGetSubjects.name'],
+		() => {
+			if (userInfo) {
+				return fetch(API_TEST + '/subject/student', {
+					method: 'POST',
+					body: JSON.stringify({
+						studentId: userInfo.user.studentId,
+					}),
+					headers: {
+						'Content-type': 'application/json',
+					},
+				})
+					.then((res) => res.json())
+					.then((result) => result.result)
+			}
+			return []
+		},
+		{
+			refetchInterval: 10000,
+		}
+	)
 }

@@ -6,7 +6,6 @@ const BodyEmployee = styled.div`
 	display: flex;
 	justify-content: space-between;
 	background-color: #23272b;
-	padding: 0 20px;
 	box-sizing: border-box;
 	width: 100%;
 	overflow: scroll;
