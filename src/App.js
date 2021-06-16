@@ -63,15 +63,20 @@ function App() {
 				<ContainerBody>
 					<Sidebar />
 					<Switch>
-						<Route exact path='/subject-student' component={SubjectStudent} />
 						<Route exact path='/notification' component={ViewNotification} />
 						<Route exact path='/notification/add-notification' component={NotificationAdmin} />
 						<Route exact path='/dashboard-admin' component={DashboardAdmin} />
 						<Route exact path='/students/profile' component={Profile} />
 						<Route exact path='/holiday' component={Holiday} />
-						<Route exact path='/attendance' component={AttendancePage} />
+						{data.isLogin.isTeacher ? (
+							<Route exact path='/attendance' component={AttendancePage} />
+						) : null}
 						<Route exact path='/students' component={StudentsPage} />
-						<Route exact path='/subject' component={Subject} />
+						{data.isLogin.isTeacher ? (
+							<Route exact path='/subject' component={Subject} />
+						) : (
+							<Route exact path='/subject' component={SubjectStudent} />
+						)}
 						<Route exact path='/subject/view'>
 							<StudentsView />
 						</Route>

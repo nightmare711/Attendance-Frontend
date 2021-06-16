@@ -14,6 +14,7 @@ const accessId = CryptoJS.AES.decrypt(
 	JSON.parse(localStorage.getItem('l_i'))?.userId || '',
 	KEY_SECRET
 ).toString(CryptoJS.enc.Utf8)
+const isTeacher = JSON.parse(localStorage.getItem('l_i'))?.isTeacher
 const studentId = JSON.parse(localStorage.getItem('l_i'))?.studentId
 export const Provider = ({ children }) => {
 	const [isOpenSidebar, setIsOpenSidebar] = React.useState(true)
@@ -21,7 +22,9 @@ export const Provider = ({ children }) => {
 		accessToken: accessToken || '',
 		user_id: accessId || '',
 		studentId: studentId || '',
+		isTeacher: isTeacher || '',
 	})
+	const [selectedAttendance, setSelectedAttendance] = React.useState('')
 	const [isOpenWebcam, setIsOpenWebcam] = React.useState(false)
 	const [info, setInfo] = React.useState({
 		email: '',
@@ -60,6 +63,8 @@ export const Provider = ({ children }) => {
 					setIdProject,
 					studentSelected,
 					setStudentSelected,
+					selectedAttendance,
+					setSelectedAttendance,
 				}}
 			>
 				<QueryClientProvider client={queryClient}>{children}</QueryClientProvider>

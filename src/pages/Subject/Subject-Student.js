@@ -5,6 +5,7 @@ import { PaddingContent } from 'components'
 import { Title } from 'components/Title/Title'
 import { useGetSubjects } from 'queries/students.query'
 import { useAttendance } from 'services/students/useAttendance'
+import { DataContext } from 'contexts/DataContext'
 
 const SubjectContainer = styled.div`
 	background-color: #23272b;
@@ -23,13 +24,20 @@ const CardContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 `
+const ContainerRightText = styled.div`
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	flex: 1;
+	max-width: 70%;
+`
 const Students = styled.div`
 	display: flex;
 	flex-direction: row;
-	justify-content: space-around;
+	justify-content: space-between;
 	background-color: #17191c;
 	width: 100%;
-	padding: 20px;
+	padding: 20px 40px;
 	border-radius: 5px;
 	margin-top: 20px;
 `
@@ -75,6 +83,7 @@ const SidePart = styled.div`
 export const SubjectStudent = () => {
 	const { data: subjects } = useGetSubjects()
 	const { mutate: attendance } = useAttendance()
+	const data = React.useContext(DataContext)
 	return (
 		<SubjectContainer>
 			<PaddingContent>
@@ -84,32 +93,41 @@ export const SubjectStudent = () => {
 						? subjects.map((subject) => (
 								<Students>
 									<Avatar src={subject.imgUrl} />
-									<SidePart>
-										<TextContainer>
-											<Name>Subject Name: {subject.subjectName}</Name>
-											<ID>Subject ID: {subject._id}</ID>
-											<ID>Date Start: {subject.date[0].toString()}</ID>
-											<ID>Date End: {subject.date[1].toString()}</ID>
-											<ID>Time start: {subject.time[0]}:00</ID>
-											<ID>Time End: {subject.time[1]}:00</ID>
-										</TextContainer>
-										<BtnView onClick={() => attendance(subject._id)}>Attendance</BtnView>
-									</SidePart>
-									<SidePart>
-										<TextContainer>
-											<Name>Teacher Name: {subject.teacherName}</Name>
-											<ID>Teacher ID: {subject.teacherId}</ID>
-											<ID>Email: {subject.teacherEmail}</ID>
-											<ID>Phone Number: {subject.phoneNumber}</ID>
-										</TextContainer>
-										<BtnView
-											onClick={() => {
-												window.open('https://www.messenger.com/t/' + subject.idFB || '', '_blank')
-											}}
-										>
-											Chat with teacher
-										</BtnView>
-									</SidePart>
+									<ContainerRightText>
+										<SidePart>
+											<TextContainer>
+												<Link
+													onClick={() => {
+														data.setIdProject(subject._id)
+													}}
+													to='/notification'
+												>
+													<Name>Subject Name: {subject.subjectName}</Name>
+												</Link>
+												<ID>Subject ID: {subject._id}</ID>
+												<ID>Date Start: {subject.date[0].toString()}</ID>
+												<ID>Date End: {subject.date[1].toString()}</ID>
+												<ID>Time start: {subject.time[0]}:00</ID>
+												<ID>Time End: {subject.time[1]}:00</ID>
+											</TextContainer>
+											<BtnView onClick={() => attendance(subject._id)}>Attendance</BtnView>
+										</SidePart>
+										<SidePart>
+											<TextContainer>
+												<Name>Teacher Name: {subject.teacherName}</Name>
+												<ID>Teacher ID: {subject.teacherId}</ID>
+												<ID>Email: {subject.teacherEmail}</ID>
+												<ID>Phone Number: {subject.phoneNumber}</ID>
+											</TextContainer>
+											<BtnView
+												onClick={() => {
+													window.open('https://www.messenger.com/t/' + subject.idFB || '', '_blank')
+												}}
+											>
+												Chat with teacher
+											</BtnView>
+										</SidePart>
+									</ContainerRightText>
 								</Students>
 						  ))
 						: null}

@@ -64,7 +64,9 @@ export const useLogin = () => {
 						accessToken: result.accessToken,
 						user_id: result.user,
 						studentId: result.studentId,
+						isTeacher: result.isTeacher,
 					})
+					console.log('test', result)
 					localStorage.setItem(
 						'l_i',
 						JSON.stringify({
@@ -72,6 +74,7 @@ export const useLogin = () => {
 							cipherText: cipherText,
 							expiration: new Date().getTime() + 1800000,
 							studentId: result.studentId,
+							isTeacher: result.isTeacher,
 						})
 					)
 				} else {

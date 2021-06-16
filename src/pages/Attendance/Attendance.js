@@ -1,16 +1,17 @@
 import React from 'react'
 import { Title } from 'components/Title/Title'
 import { PaddingContent } from 'components'
-import { listAttendance } from 'constants/attendance'
 import styled, { css } from 'styled-components'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { useGetAttendanceSubject } from 'queries/teacher.queries'
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons'
 
 const AttendanceContainer = styled.div`
 	background-color: #23272b;
 	width: 100%;
 	color: white;
-	overflow: scroll;
+	overflow-y: scroll;
+	overflow-x: hidden;
 `
 const ContainerList = styled.div`
 	display: grid;
@@ -59,14 +60,12 @@ const TableAttendance = styled.table`
 	color: #bbc4cc;
 `
 const ImgEmp = styled.img`
-	width: 100%;
+	width: 40px;
+	height: 40px;
 	border-radius: 50%;
-`
-const ImgDiv = styled.div`
-	width: 24px;
-	height: 24px;
 	margin-right: 10px;
 `
+
 const TRTable = styled.tr`
 	&:nth-child(odd) {
 		background: rgba(22, 25, 28, 1);
@@ -77,6 +76,7 @@ const THTable = styled.th`
 	padding: 10px 8px;
 `
 const TDTable = styled.td`
+	text-align: center;
 	${(props) =>
 		props.name &&
 		css`
@@ -96,6 +96,8 @@ const No = styled.div`
 	color: #f62d51;
 `
 export const AttendancePage = () => {
+	const attendance = useGetAttendanceSubject()
+	console.log('attendance page', attendance)
 	return (
 		<AttendanceContainer>
 			<PaddingContent>
@@ -160,29 +162,28 @@ export const AttendancePage = () => {
 						<THTable>29</THTable>
 						<THTable>30</THTable>
 					</TRTable>
-					{listAttendance.map((item) => (
-						<TRTable>
-							<TDTable name>
-								<ImgDiv>
-									<ImgEmp src={item.img} />
-								</ImgDiv>
-								{item.name}
-							</TDTable>
-							{item.attendance.map((check) => (
-								<TDTable>
-									{check ? (
-										<Yes>
-											<FontAwesomeIcon icon={faCheck} />
-										</Yes>
-									) : (
-										<No>
-											<FontAwesomeIcon icon={faTimes} />
-										</No>
-									)}
-								</TDTable>
-							))}
-						</TRTable>
-					))}
+					{attendance
+						? attendance.map((item, index) => (
+								<TRTable key={index}>
+									<TDTable name>
+										<ImgEmp src={item.studentInfo[0].imgUrl} /> {item.studentInfo[0].name}
+									</TDTable>
+									{item.attendance.map((check) => (
+										<TDTable>
+											{check ? (
+												<Yes>
+													<FontAwesomeIcon icon={faCheck} />
+												</Yes>
+											) : (
+												<No>
+													<FontAwesomeIcon icon={faTimes} />
+												</No>
+											)}
+										</TDTable>
+									))}
+								</TRTable>
+						  ))
+						: null}
 				</TableAttendance>
 			</PaddingContent>
 		</AttendanceContainer>

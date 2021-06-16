@@ -121,7 +121,11 @@ export const Subject = () => {
 											</Link>
 										</TDescription>
 										<TDescription>
-											<BtnTertiary>View</BtnTertiary>
+											<Link to='/attendance'>
+												<BtnTertiary onClick={() => data.setSelectedAttendance(subject._id)}>
+													View
+												</BtnTertiary>
+											</Link>
 										</TDescription>
 
 										<TDescription>

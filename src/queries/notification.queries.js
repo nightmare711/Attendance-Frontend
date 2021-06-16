@@ -40,31 +40,60 @@ export const useGetNotification = () => {
 		['useGetNotification.name'],
 		() => {
 			if (data.isLogin.user_id && user) {
-				return fetch(API_TEST + '/notification/filter', {
-					method: 'POST',
-					body: JSON.stringify({
-						teacherId: data.isLogin.user_id,
-					}),
-					headers: {
-						'Content-type': 'application/json',
-					},
-				})
-					.then((res) => res.json())
-					.then((result) => {
-						const temp = []
-						for (let i = 0; i < result.result.length; i++) {
-							temp.push({
-								...result.result[i],
-								...user.user,
-							})
-						}
-						console.log(temp)
-						return temp
+				if (data.isLogin.isTeacher) {
+					return fetch(API_TEST + '/notification/filter', {
+						method: 'POST',
+						body: JSON.stringify({
+							teacherId: data.isLogin.user_id,
+						}),
+						headers: {
+							'Content-type': 'application/json',
+						},
 					})
-					.catch((err) => {
-						console.log(err)
-						return []
+						.then((res) => res.json())
+						.then((result) => {
+							const temp = []
+							for (let i = 0; i < result.result.length; i++) {
+								temp.push({
+									...result.result[i],
+									...user.user,
+								})
+							}
+							console.log(temp)
+							return temp
+						})
+						.catch((err) => {
+							console.log(err)
+							return []
+						})
+				} else {
+					return fetch(API_TEST + '/notification/filter-subId', {
+						method: 'POST',
+						body: JSON.stringify({
+							subjectId: data.idProject,
+						}),
+						headers: {
+							'Content-type': 'application/json',
+						},
 					})
+						.then((res) => res.json())
+						.then((result) => {
+							console.log('noti', result)
+							const temp = []
+							for (let i = 0; i < result.result.length; i++) {
+								temp.push({
+									...result.result[i],
+									...user.user,
+								})
+							}
+							console.log(temp)
+							return temp
+						})
+						.catch((err) => {
+							console.log(err)
+							return []
+						})
+				}
 			}
 			return []
 		},
