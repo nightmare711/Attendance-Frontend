@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { listSidebar } from 'constants/constants'
 import { Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
@@ -20,17 +20,23 @@ const ListView = styled.ul`
 const ContainerLeft = styled.div``
 
 const Item = styled.li`
+	background-color: ({ active }) => active ? #e6007e :#000;
 	&:hover {
 		color: white;
 	}
+	&:active {
+		color: chocolate;
+		text-decoration: underline;
+	}
 `
+
 const TitleItem = styled.span``
 export const Sidebar = () => {
 	return (
 		<Container id='sidebar'>
 			<ListView>
 				{listSidebar.map((item, index) => (
-					<Item key={index}>
+					<Item key={index} id={'selector' + index}>
 						<Link to={item.href}>
 							<ContainerLeft>
 								<FontAwesomeIcon icon={item.icon} />

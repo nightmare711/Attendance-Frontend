@@ -84,7 +84,7 @@ const TDTable = styled.td`
 			align-items: center;
 			vertical-align: middle;
 			white-space: nowrap;
-			margin: 0;
+			margin-right: 30px;
 			padding: ;
 		`};
 	padding: 10px 8px;

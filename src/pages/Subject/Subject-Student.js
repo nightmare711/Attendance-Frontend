@@ -6,6 +6,7 @@ import { Title } from 'components/Title/Title'
 import { useGetSubjects } from 'queries/students.query'
 import { useAttendance } from 'services/students/useAttendance'
 import { DataContext } from 'contexts/DataContext'
+import { css } from 'styled-components'
 
 const SubjectContainer = styled.div`
 	background-color: #23272b;
@@ -45,10 +46,12 @@ const TextContainer = styled.div`
 	display: flex;
 	flex-direction: column;
 	cursor: pointer;
+	height: 190px;
+	overflow: hidden;
 `
 const Name = styled.span`
 	font-family: 'Comic Sans MS';
-	font-size: 18px;
+	font-size: 20px;
 	font-weight: 600;
 	text-transform: capitalize;
 	color: #bbc4cc;
@@ -57,15 +60,27 @@ const ID = styled.span`
 	font-weight: 400;
 	font-size: 14px;
 	color: #8e8e8e;
+	margin-bottom: 7px;
 	font-family: 'Comic Sans MS';
+	${(props) =>
+		props.Top &&
+		css`
+			margin-top: 20px;
+		`};
+`
+const TitleID = styled.span`
+	width: 100px;
+	margin-right: 10px;
+	float: left;
 `
 const BtnView = styled.div`
 	padding: 10px;
-	background-color: black;
+	background-color: #ff9b43;
 	border-radius: 10px;
 	margin-top: 10px;
 	font-weight: 600;
-	width: fit-content;
+	width: 140px;
+	text-align: center;
 	cursor: pointer;
 	font-size: 13px;
 	transition: all 0.3s;
@@ -73,8 +88,7 @@ const BtnView = styled.div`
 		transform: translateY(3px);
 	}
 	&:hover {
-		background-color: white;
-		color: black;
+		background-color: #ff7c0a;
 	}
 `
 const SidePart = styled.div`
@@ -104,20 +118,36 @@ export const SubjectStudent = () => {
 												>
 													<Name>Subject Name: {subject.subjectName}</Name>
 												</Link>
-												<ID>Subject ID: {subject._id}</ID>
-												<ID>Date Start: {subject.date[0].toString()}</ID>
-												<ID>Date End: {subject.date[1].toString()}</ID>
-												<ID>Time start: {subject.time[0]}:00</ID>
-												<ID>Time End: {subject.time[1]}:00</ID>
+												<ID Top>
+													<TitleID>Subject ID:</TitleID> {subject._id}
+												</ID>
+												<ID>
+													<TitleID>Date Start:</TitleID> {subject.date[0].toString()}
+												</ID>
+												<ID>
+													<TitleID>Date End:</TitleID> {subject.date[1].toString()}
+												</ID>
+												<ID>
+													<TitleID>Time start:</TitleID> {subject.time[0]}:00
+												</ID>
+												<ID>
+													<TitleID>Time End:</TitleID> {subject.time[1]}:00
+												</ID>
 											</TextContainer>
 											<BtnView onClick={() => attendance(subject._id)}>Attendance</BtnView>
 										</SidePart>
 										<SidePart>
 											<TextContainer>
 												<Name>Teacher Name: {subject.teacherName}</Name>
-												<ID>Teacher ID: {subject.teacherId}</ID>
-												<ID>Email: {subject.teacherEmail}</ID>
-												<ID>Phone Number: {subject.phoneNumber}</ID>
+												<ID Top>
+													<TitleID>Teacher ID:</TitleID> {subject.teacherId}
+												</ID>
+												<ID>
+													<TitleID>Email:</TitleID> {subject.teacherEmail}
+												</ID>
+												<ID>
+													<TitleID>Phone Number:</TitleID> {subject.phoneNumber}
+												</ID>
 											</TextContainer>
 											<BtnView
 												onClick={() => {

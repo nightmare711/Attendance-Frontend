@@ -1,10 +1,14 @@
 #sidebar a {
-    width: 300px;
-	font-size: 17px;
-	padding: 20px 30px;
-	transition: all 0.3s;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	cursor: pointer;
+  width: 300px;
+  font-size: 17px;
+  padding: 20px 30px;
+  transition: all 0.3s;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  cursor: pointer;
+}
+.active {
+  color: chocolate;
+  text-decoration: underline;
 }
